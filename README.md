@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/CoderEugene/Seed.svg?branch=master)](https://travis-ci.com/CoderEugene/Seed) ![language](https://img.shields.io/badge/language-java-orange.svg) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-<img src="http://qiniu.zzcoder.cn/github-seed-logo.png" alt="seed-logo" style="zoom: 33%;" />
+<img src="http://qiniu.zzcoder.cn/github-seed-logo_tiny.jpg" alt="seed-logo" style="zoom:50%;" />
 
 # What‘s Seed？
 
