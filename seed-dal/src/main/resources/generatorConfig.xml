@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="MySql" defaultModelType="flat"  targetRuntime="MyBatis3">
+
+        <plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">
+            <!-- enable annotations -->
+            <property name="builder" value="true"/>
+            <!-- annotation's option(boolean) -->
+            <property name="builder.fluent" value="true"/>
+            <!-- annotation's option(String) -->
+            <property name="builder.builderMethodName" value="myBuilder"/>
+            <property name="accessors" value="true"/>
+            <!-- annotation's option(array of String) -->
+            <property name="accessors.prefix" value="m_, _"/>
+            <!-- disable annotations -->
+            <property name="allArgsConstructor" value="false"/>
+        </plugin>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://127.0.0.1:3306/employees"
+                userId="root"
+                password="12345678" />
+
+        <!-- 指定自动生成的 POJO置于哪个包下 -->
+        <javaModelGenerator targetPackage="com.base.seed.dal.entity.employees" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 指定自动生成的 mapper.xml置于哪个包下 -->
+        <sqlMapGenerator targetPackage="mapper.employees"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 指定自动生成的 DAO接口置于哪个包下 -->
+        <javaClientGenerator targetPackage="com.base.seed.dal.mapper.employees" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 指定数据表名 -->
+        <table  tableName="employees" domainObjectName="EmployeesDo"
+                enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false">
+<!--            <columnOverride column="account_type" property="accountType" javaType="java.lang.Integer" jdbcType="INTEGER"/>-->
+        </table>
+    </context>
+</generatorConfiguration>

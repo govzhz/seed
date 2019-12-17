@@ -1,0 +1,55 @@
+package com.base.seed.facade.support;
+
+
+public enum RespCode {
+
+    /** 成功 */
+    SUCCESS(1, "成功"),
+
+    /** 失败 */
+    FAIL(99, "失败"),
+
+    /** 处理中 */
+    PROCESSING(2, "处理中"),
+
+    /** 订单不存在 */
+    NON_EXISTS(-1, "订单不存在"),
+
+    /** 系统异常 */
+    SYS_EXCEPTION(1001, "系统异常"),
+
+    /** 参数不合法 */
+    PARAMS_INVALID(1999, "参数不合法"),
+
+    /** 鉴权失败 */
+    UNAUTHORIZED(2001, "鉴权失败")
+    ;
+
+    private int    code;
+    private String message;
+
+    RespCode(int code, String message){
+        this.code = code;
+        this.message = message;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getCodeStr(){
+        return Integer.toString(code);
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+}
