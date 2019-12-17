@@ -26,8 +26,6 @@ With this skeleton project, you have completed the integration of the following 
 
 It also implements commonly used toolkits
 
-- [ ] 
-- [x] 
 - [x] Email
 - [x] Http
 - [x] Excel
