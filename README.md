@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.com/CoderEugene/Seed.svg?branch=master)](https://travis-ci.com/CoderEugene/Seed) ![language](https://img.shields.io/badge/language-java-orange.svg) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 <div align=center><img src="http://qiniu.zzcoder.cn/seed.png"/></div>
+
 # What‘s Seed？
 
 Seed is a skeleton project based on springboot2.x, integrating common components such as dubbo, redis, and various best practices, and its submodule division rules are as follows: 
