@@ -1,4 +1,4 @@
-package com.base.seed.webapp.component;
+package com.base.seed.webapp.service;
 
 import com.base.seed.webapp.BaseTest;
 import lombok.Data;

@@ -1,6 +1,6 @@
-package com.base.seed.webapp.observer;
+package com.base.seed.webapp.service;
 
-import com.base.seed.service.demo.observer.spring.RegisterPublisher;
+import com.base.seed.service.demo.observer.RegisterPublisher;
 import com.base.seed.webapp.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

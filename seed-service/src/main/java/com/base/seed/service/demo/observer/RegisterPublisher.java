@@ -1,4 +1,4 @@
-package com.base.seed.service.demo.observer.spring;
+package com.base.seed.service.demo.observer;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;

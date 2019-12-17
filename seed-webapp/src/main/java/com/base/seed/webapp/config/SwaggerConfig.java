@@ -25,7 +25,7 @@ public class SwaggerConfig {
 
     private ApiInfo buildApiInf() {
         return new ApiInfoBuilder()
-                .title("基础服务")
+                .title("基础骨架")
                 .termsOfServiceUrl("")
                 .description("项目接口描述").build();
     }

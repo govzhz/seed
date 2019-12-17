@@ -5,7 +5,7 @@ spring:
   application:
     name: seed
   redis:
-    host: 192.168.20.46
+    host: 127.0.0.1
     port: 6379
     password: admin
   datasource:
@@ -38,11 +38,10 @@ spring:
 
 mybatis:
   mapperLocations: classpath:mapper/*/*.xml
-  type-aliases-package: com.base.seed.dal
 
 dubbo:
   registry:
-    address: zk1.wd.com:2181
+    address: 127.0.0.1:2181
     protocol: zookeeper
   protocol:
     name: dubbo

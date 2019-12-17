@@ -1,7 +1,8 @@
-package com.base.seed.webapp;
+package com.base.seed.webapp.service;
 
 import com.base.seed.service.demo.strategy.DiscountContext;
 import com.base.seed.service.demo.strategy.IdentityEnum;
+import com.base.seed.webapp.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

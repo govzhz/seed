@@ -35,7 +35,7 @@ public class CrossFilter implements Filter {
         response1.setHeader("Access-Control-Allow-Methods", request1.getHeader("Access-Control-Request-Method"));
         response1.setHeader("Access-Control-Allow-Headers", request1.getHeader("Access-Control-Request-Headers"));
         response1.setHeader("Access-Control-Allow-Credentials", "true");
-        if (null != method && method.equals("OPTIONS")) {
+        if ("OPTIONS".equals(method)) {
             response1.setStatus(200);
             return;
         }
