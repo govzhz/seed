@@ -41,7 +41,7 @@ It also implements commonly used toolkits
 
 # Quick Start
 
-You can choose to modify directly from the source or generate from the skeleton.
+You can choose to modify directly from the source or generate from the skeleton. The way to use the skeleton is as follows: 
 
 1. Put the Skeleton into the Maven Local Repository
 
@@ -58,7 +58,7 @@ You can choose to modify directly from the source or generate from the skeleton.
      -DarchetypeGroupId=com.base \
      -DarchetypeArtifactId=seed-archetype \
      -DarchetypeVersion=0.0.1-SNAPSHOT \
-     -DgroupId=[your artifactId] \
+     -DgroupId=[your groupId] \
      -DartifactId=[your artifactId] \
      -Dpackage=[your package] \
      -Dversion=[your version]
