@@ -4,7 +4,7 @@
 
 # What‘s Seed？
 
-Seed is a skeleton project based on springboot2, integrating common components such as dubbo, redis, and various best practices, and its submodule division rules are as follows: 
+Seed is a skeleton project based on springboot2.x, integrating common components such as dubbo, redis, and various best practices, and its submodule division rules are as follows: 
 
 - ❑ common：General tools
 - ❑ dal：Data Access Layer
