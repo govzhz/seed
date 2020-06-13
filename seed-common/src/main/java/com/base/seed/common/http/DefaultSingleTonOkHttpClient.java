@@ -1,9 +1,8 @@
 package com.base.seed.common.http;
 
+import java.util.concurrent.TimeUnit;
 import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * HttpClient单例类
@@ -16,23 +15,21 @@ import java.util.concurrent.TimeUnit;
  *                  1. connectTimeout可以相对较短
  *                  2. 适当增大maxRequests和maxRequestsPerHost
  *
- * @author zz 2019-04-05
  */
 public class DefaultSingleTonOkHttpClient {
 
-    private static class DefaultOkHttpClientHolder {
+  private static class DefaultOkHttpClientHolder {
 
-        private static final OkHttpClient CLIENT = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .connectionPool(new ConnectionPool(10, 60, TimeUnit.SECONDS))
-                .retryOnConnectionFailure(true)
-                .build();
-    }
+    private static final OkHttpClient CLIENT = new OkHttpClient.Builder()
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .writeTimeout(15, TimeUnit.SECONDS)
+        .readTimeout(15, TimeUnit.SECONDS)
+        .connectionPool(new ConnectionPool(10, 60, TimeUnit.SECONDS))
+        .retryOnConnectionFailure(true)
+        .build();
+  }
 
-    public static OkHttpClient getInstance(){
-        return DefaultOkHttpClientHolder.CLIENT;
-    }
-
+  public static OkHttpClient getInstance() {
+    return DefaultOkHttpClientHolder.CLIENT;
+  }
 }

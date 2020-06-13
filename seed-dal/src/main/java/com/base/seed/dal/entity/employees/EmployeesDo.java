@@ -7,17 +7,18 @@ import lombok.Data;
 @Data
 @Builder
 public class EmployeesDo {
-    private Integer empNo;
 
-    private Date birthDate;
+  private Integer empNo;
 
-    private String firstName;
+  private Date birthDate;
 
-    private String lastName;
+  private String firstName;
 
-    private String gender;
+  private String lastName;
 
-    private Date hireDate;
+  private String gender;
 
-    private Integer uniId;
+  private Date hireDate;
+
+  private Integer uniId;
 }

@@ -1,23 +1,23 @@
 package com.base.seed.dal.mapper.employees;
 
 import com.base.seed.dal.entity.employees.EmployeesDo;
-import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface EmployeesDoMapper {
-    int deleteByPrimaryKey(Integer empNo);
 
-    int insert(EmployeesDo record);
+  int deleteByPrimaryKey(Integer empNo);
 
-    int insertSelective(EmployeesDo record);
+  int insert(EmployeesDo record);
 
-    EmployeesDo selectByPrimaryKey(Integer empNo);
+  int insertSelective(EmployeesDo record);
 
-    int updateByPrimaryKeySelective(EmployeesDo record);
+  EmployeesDo selectByPrimaryKey(Integer empNo);
 
-    int updateByPrimaryKey(EmployeesDo record);
+  int updateByPrimaryKeySelective(EmployeesDo record);
 
-    List<EmployeesDo> selectByBirthDate();
+  int updateByPrimaryKey(EmployeesDo record);
+
+  List<EmployeesDo> selectByBirthDate();
 }

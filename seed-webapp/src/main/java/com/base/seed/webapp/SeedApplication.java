@@ -12,8 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 @DubboComponentScan(basePackages = {"com.base.seed"})
 public class SeedApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SeedApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(SeedApplication.class, args);
+  }
 }

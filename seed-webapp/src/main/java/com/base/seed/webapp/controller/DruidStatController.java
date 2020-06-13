@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DruidStatController {
 
-    @GetMapping("/druid/stat")
-    public Object druidStat(){
-        return DruidStatManagerFacade.getInstance().getDataSourceStatDataList();
-    }
+  @GetMapping("/druid/stat")
+  public Object druidStat() {
+    return DruidStatManagerFacade.getInstance().getDataSourceStatDataList();
+  }
 }

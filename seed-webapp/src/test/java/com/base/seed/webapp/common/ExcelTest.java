@@ -18,7 +18,7 @@ public class ExcelTest extends BaseTest {
         try {
             List<Person> res = ExcelUtil.readExcel("./excel/test.xlsx", Person.class, new PreValidatedCallback() {
                 @Override
-                public <T> boolean pass(T t) {
+                public <T> boolean validate(T t) {
                     return true;
                 }
             });

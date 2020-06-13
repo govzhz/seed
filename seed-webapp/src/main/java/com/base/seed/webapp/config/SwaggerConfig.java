@@ -13,20 +13,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    @Bean
-    public Docket buildDocket() {
+  @Bean
+  public Docket buildDocket() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(buildApiInf())
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.base.seed"))
+        .build();
+  }
 
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(buildApiInf())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.base.seed"))
-                .build();
-    }
-
-    private ApiInfo buildApiInf() {
-        return new ApiInfoBuilder()
-                .title("基础骨架")
-                .termsOfServiceUrl("")
-                .description("项目接口描述").build();
-    }
+  private ApiInfo buildApiInf() {
+    return new ApiInfoBuilder()
+        .title("基础骨架")
+        .termsOfServiceUrl("")
+        .description("项目接口描述").build();
+  }
 }

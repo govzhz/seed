@@ -5,8 +5,6 @@ import io.github.biezhi.ome.OhMyEmail;
 import java.util.Properties;
 
 /**
- * @author zz 2019/12/11
- *
  * @see: https://github.com/biezhi/oh-my-email
  */
 public class EmailUtil {

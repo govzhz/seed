@@ -10,15 +10,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(classes = SeedApplication.class)
 public class BaseTest {
 
-    @Before
-    public void beforeTest(){
-        System.out.println("\n\n==================== 开始单元测试 ====================\n");
+  @Before
+  public void beforeTest() {
+    System.out.println("\n\n==================== 开始单元测试 ====================\n");
+  }
 
-    }
-    @After
-    public void afterTest(){
-
-        System.out.println("\n==================== 单元测试结束 ====================\n\n");
-    }
-
+  @After
+  public void afterTest() {
+    System.out.println("\n==================== 单元测试结束 ====================\n\n");
+  }
 }

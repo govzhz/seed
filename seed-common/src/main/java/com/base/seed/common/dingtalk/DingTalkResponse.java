@@ -8,13 +8,13 @@ import lombok.Data;
 @Data
 public class DingTalkResponse {
 
-    /**
-     * 返回码-  0为成功
-     */
-    private String errCode;
+  /**
+   * 返回码-  0为成功
+   */
+  private String errCode;
 
-    /**
-     * 返回信息- ok 为成功
-     */
-    private String errMsg;
+  /**
+   * 返回信息- ok 为成功
+   */
+  private String errMsg;
 }

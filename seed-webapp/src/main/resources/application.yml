@@ -39,10 +39,10 @@ spring:
 mybatis:
   mapperLocations: classpath:mapper/*/*.xml
 
-dubbo:
-  registry:
-    address: 127.0.0.1:2181
-    protocol: zookeeper
-  protocol:
-    name: dubbo
-    port: 18081
+#dubbo:
+#  registry:
+#    address: 127.0.0.1:2181
+#    protocol: zookeeper
+#  protocol:
+#    name: dubbo
+#    port: 18081

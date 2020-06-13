@@ -4,38 +4,29 @@
 
 Seed is a skeleton project based on springboot2.x, integrating common components such as dubbo, redis, and various best practices, and its submodule division rules are as follows: 
 
-- ❑ common：General tools
+- ❑ common：Common module
 - ❑ dal：Data Access Layer
 - ❑ service：Service Layer
-- ❑ controller：Presentation Layer
+- ❑ controller：Controller Layer
 - ❑ integration：Integrate third-party services, such as dubbo
 - ❑ facade：Provide dubbo services
 
 With this skeleton project, you have completed the integration of the following modules:
 
 - [x] Dubbo
-- [x] Redis
 - [x] Druid
 - [x] Mybatis
 - [x] Pagehelper
-- [ ] RocketMQ
 - [x] Swagger
+- [ ] Spring Security
+- [ ] Sharding-JDBC
+- [ ] Reddison
+- [ ] Sentinel
+- [ ] RocketMQ
 - [ ] Elastic-Job
 - [ ] Seata
 - [ ] Nacos
-- [ ] Sharding-JDBC
-- [ ] Shiro
-
-It also implements commonly used toolkits
-
-- [x] Email
-- [x] Http
-- [x] Excel
-- [x] Login 
-- [x] DingTalk
-- [x] CORS
-- [ ] Flow Control
-- [ ] Captcha
+- [ ] SkyWalking
 
 # Quick Start
 
@@ -88,6 +79,7 @@ You can choose to modify directly from the source or generate from the skeleton.
 | `pagehelper-spring-boot-starter` | `1.2.13`        |
 | `mybatis-spring-boot-starter`    | `2.1.1`         |
 | `vjkit`                          | `1.0.8`         |
-| `fastjson`                       | `1.2.62`        |
+| `fastjson`                       | `1.2.70`        |
 | `swagger`                        | `2.9.2`         |
-| `lombok`                         | `1.8.10`        |
+| `lombok`                         | `1.8.12`        |
+
