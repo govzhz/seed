@@ -22,12 +22,12 @@ public final class RpcResult<T> implements Serializable {
   /**
    * 返回码
    */
-  private Integer code;
+  private String errorCode;
 
   /**
    * 返回信息
    */
-  private String message;
+  private String errorMessage;
 
   /**
    * 返回数据
@@ -35,49 +35,35 @@ public final class RpcResult<T> implements Serializable {
   private T data;
 
   public boolean isSuccess() {
-    return code.equals(RespCode.SUCCESS.getCode());
+    return errorCode.equals(ResponseCode.SUCCESS.getErrorCode());
   }
 
-  public static <T> RpcResult<T> success(T data) {
+  public static <T> RpcResult<T> ok(T data) {
     return RpcResult.<T>builder()
-        .code(RespCode.SUCCESS.getCode())
-        .message(RespCode.SUCCESS.getMessage())
+        .errorCode(ResponseCode.SUCCESS.getErrorCode())
+        .errorMessage(ResponseCode.SUCCESS.getErrorMessage())
         .data(data)
         .build();
   }
 
-  public static <T> RpcResult<T> success() {
+  public static <T> RpcResult<T> ok() {
     return RpcResult.<T>builder()
-        .code(RespCode.SUCCESS.getCode())
-        .message(RespCode.SUCCESS.getMessage())
+        .errorCode(ResponseCode.SUCCESS.getErrorCode())
+        .errorMessage(ResponseCode.SUCCESS.getErrorMessage())
         .build();
   }
 
-  public static <T> RpcResult<T> failed(Integer code, String desc) {
+  public static <T> RpcResult<T> failed(String code, String desc) {
     return RpcResult.<T>builder()
-        .code(code)
-        .message(desc)
+        .errorCode(code)
+        .errorMessage(desc)
         .build();
   }
 
-  public static <T> RpcResult<T> failed(RespCode respCode) {
+  public static <T> RpcResult<T> failed(ResponseCode responseCode) {
     return RpcResult.<T>builder()
-        .code(respCode.getCode())
-        .message(respCode.getMessage())
-        .build();
-  }
-
-  public static <T> RpcResult<T> dependOnCode(RespCode respCode) {
-    return RpcResult.<T>builder()
-        .code(respCode.getCode())
-        .message(respCode.getMessage())
-        .build();
-  }
-
-  public static <T> RpcResult<T> dependOnCode(Integer code, String desc) {
-    return RpcResult.<T>builder()
-        .code(code)
-        .message(desc)
+        .errorCode(responseCode.getErrorCode())
+        .errorMessage(responseCode.getErrorMessage())
         .build();
   }
 }

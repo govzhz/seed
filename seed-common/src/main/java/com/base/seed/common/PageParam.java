@@ -1,12 +1,7 @@
 package com.base.seed.common;
 
 import javax.validation.constraints.NotNull;
-import lombok.Data;
 
-/**
- * @author zhangzheng 2020/6/14
- */
-@Data
 public class PageParam {
 
   /**
@@ -20,4 +15,20 @@ public class PageParam {
    */
   @NotNull
   private Integer size;
+
+  public void setPage(Integer page) {
+    this.page = page;
+  }
+
+  public void setSize(Integer size) {
+    this.size = size;
+  }
+
+  public Integer getPage() {
+    return page;
+  }
+
+  public Integer getSize() {
+    return size;
+  }
 }

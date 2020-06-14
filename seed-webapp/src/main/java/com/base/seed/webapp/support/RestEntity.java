@@ -1,6 +1,6 @@
 package com.base.seed.webapp.support;
 
-import com.base.seed.facade.support.RespCode;
+import com.base.seed.facade.support.ResponseCode;
 import java.io.Serializable;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,14 +16,14 @@ public final class RestEntity<T> implements Serializable {
   /**
    * 返回码
    *
-   * @see RespCode
+   * @see ResponseCode
    */
-  private final Integer code;
+  private final String errorCode;
 
   /**
    * 返回信息
    */
-  private final String message;
+  private final String errorMessage;
 
   /**
    * 返回数据
@@ -35,41 +35,41 @@ public final class RestEntity<T> implements Serializable {
    */
   private final Long total;
 
-  public static <T> RestEntity<T> success() {
+  public static <T> RestEntity<T> ok() {
     return RestEntity.<T>builder()
-        .code(RespCode.SUCCESS.getCode())
-        .message(RespCode.SUCCESS.getMessage())
+        .errorCode(ResponseCode.SUCCESS.getErrorCode())
+        .errorMessage(ResponseCode.SUCCESS.getErrorMessage())
         .build();
   }
 
-  public static <T> RestEntity<T> success(T data) {
+  public static <T> RestEntity<T> ok(T data) {
     return RestEntity.<T>builder()
-        .code(RespCode.SUCCESS.getCode())
-        .message(RespCode.SUCCESS.getMessage())
+        .errorCode(ResponseCode.SUCCESS.getErrorCode())
+        .errorMessage(ResponseCode.SUCCESS.getErrorMessage())
         .data(data)
         .build();
   }
 
-  public static <T> RestEntity<T> success(T data, long total) {
+  public static <T> RestEntity<T> ok(T data, long total) {
     return RestEntity.<T>builder()
-        .code(RespCode.SUCCESS.getCode())
-        .message(RespCode.SUCCESS.getMessage())
+        .errorCode(ResponseCode.SUCCESS.getErrorCode())
+        .errorMessage(ResponseCode.SUCCESS.getErrorMessage())
         .data(data)
         .total(total)
         .build();
   }
 
-  public static <T> RestEntity<T> failed(RespCode failedCodeEnum) {
+  public static <T> RestEntity<T> failed(ResponseCode failedCode) {
     return RestEntity.<T>builder()
-        .code(failedCodeEnum.getCode())
-        .message(failedCodeEnum.getMessage())
+        .errorCode(failedCode.getErrorCode())
+        .errorMessage(failedCode.getErrorMessage())
         .build();
   }
 
-  public static <T> RestEntity<T> failed(Integer code, String desc) {
+  public static <T> RestEntity<T> failed(String code, String desc) {
     return RestEntity.<T>builder()
-        .code(code)
-        .message(desc)
+        .errorCode(code)
+        .errorMessage(desc)
         .build();
   }
 }

@@ -73,7 +73,6 @@ You can choose to modify directly from the source or generate from the skeleton.
 | -------------------------------- | --------------- |
 | `spring`                         | `5.2.2.RELEASE` |
 | `spring-boot-starter-parent`     | `2.2.2.RELEASE` |
-| `spring-boot-starter-data-redis` | `2.2.2.RELEASE` |
 | `dubbo-spring-boot-starter`      | `2.7.4.1`       |
 | `druid-spring-boot-starter`      | `1.1.17`        |
 | `pagehelper-spring-boot-starter` | `1.2.13`        |
@@ -82,4 +81,5 @@ You can choose to modify directly from the source or generate from the skeleton.
 | `fastjson`                       | `1.2.70`        |
 | `swagger`                        | `2.9.2`         |
 | `lombok`                         | `1.8.12`        |
+| `redission`                      | `3.13.1`        |
 

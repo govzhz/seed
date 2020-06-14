@@ -114,6 +114,11 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+			<dependency>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson</artifactId>
+				<version>3.13.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -138,6 +143,11 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.70</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>annotations</artifactId>
+			<version>3.0.1</version>
 		</dependency>
 	</dependencies>
 

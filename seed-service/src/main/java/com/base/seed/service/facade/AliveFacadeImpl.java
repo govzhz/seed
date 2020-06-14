@@ -9,6 +9,6 @@ public class AliveFacadeImpl implements AliveFacade {
 
   @Override
   public RpcResult<Boolean> isAlive() {
-    return RpcResult.success(true);
+    return RpcResult.ok(true);
   }
 }

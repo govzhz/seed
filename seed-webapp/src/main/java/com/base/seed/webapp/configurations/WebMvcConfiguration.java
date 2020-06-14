@@ -1,5 +1,6 @@
-package com.base.seed.webapp.config;
+package com.base.seed.webapp.configurations;
 
+import com.alibaba.fastjson.PropertyNamingStrategy;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -12,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebMvcConfiguration implements WebMvcConfigurer {
 
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -29,6 +30,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         SerializerFeature.WriteNullStringAsEmpty,
         SerializerFeature.DisableCircularReferenceDetect
     );
+    config.getSerializeConfig().propertyNamingStrategy = PropertyNamingStrategy.SnakeCase;
     converter.setFastJsonConfig(config);
     List<MediaType> fastMediaTypes = new ArrayList<>();
     fastMediaTypes.add(MediaType.APPLICATION_JSON);
