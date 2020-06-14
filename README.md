@@ -18,9 +18,9 @@ With this skeleton project, you have completed the integration of the following 
 - [x] Mybatis
 - [x] Pagehelper
 - [x] Swagger
+- [x] Redission
 - [ ] Spring Security
 - [ ] Sharding-JDBC
-- [ ] Reddison
 - [ ] Sentinel
 - [ ] RocketMQ
 - [ ] Elastic-Job
@@ -58,9 +58,6 @@ You can choose to modify directly from the source or generate from the skeleton.
    ```yaml
    server.port
    spring.application.name
-   spring.redis.host
-   spring.redis.port
-   spring.redis.password
    spring.datasource.druid.url
    spring.datasource.druid.username
    spring.datasource.druid.password
