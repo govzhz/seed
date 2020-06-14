@@ -8,12 +8,14 @@ import org.redisson.config.Config;
 import org.redisson.config.ReadMode;
 import org.redisson.config.SentinelServersConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
 @Configuration
+@ConditionalOnProperty(prefix = "redis", value = "enabled", matchIfMissing = true)
 @EnableConfigurationProperties(RedisProperties.class)
 public class RedisConfiguration {
 

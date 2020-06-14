@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RetryAttemptServiceImpl implements RetryAttemptService {
 
-  @Autowired
+  @Autowired(required = false)
   private RedissonClient redissonClient;
   private final static String PREFIX_RETRY_ATTEMPT = GlobalRedisKeys.PROJECT_PREFIX + "retryAttempt:";
 

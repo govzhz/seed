@@ -66,6 +66,10 @@ You can choose to modify directly from the source or generate from the skeleton.
    spring.datasource.druid.password
    dubbo.redistry.address
    ```
+   
+
+> - Disabled Redis: set `redis.enabled = false` in `application.yml`
+
 
 # Component Version
 

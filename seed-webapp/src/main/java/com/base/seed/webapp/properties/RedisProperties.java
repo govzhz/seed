@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class RedisProperties {
 
+  private Boolean enabled;
   private String sentinels;
   private String password;
   private Integer database;
