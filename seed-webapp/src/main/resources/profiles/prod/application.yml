@@ -1,0 +1,56 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: seed
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://prod:3306/employees?useUnicode=true&amp;characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false
+      username: root
+      password: 12345678
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 60000
+      max-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      # validation-query-timeout: 5000
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      #filters: #配置多个英文逗号分隔(统计，sql注入，log4j过滤)
+      filters: stat,wall
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+
+dubbo:
+  registry:
+    address: prod:2181
+    protocol: zookeeper
+  protocol:
+    name: dubbo
+    port: 18081
+
+redis:
+  sentinels: prod:26379,prod:26380,prod:26381
+  password: 12345678
+  database: 0
+  masterName: mymaster
+  pool:
+    max-total: 200
+    max-idle: 200
+    max-wait: 1000
+  timeout: 10000
+  testOnBorrow: true

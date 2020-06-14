@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.base.seed"})
 @MapperScan(basePackages = {"com.base.seed.dal"})
-//@DubboComponentScan(basePackages = {"com.base.seed"})
+@DubboComponentScan(basePackages = {"com.base.seed"})
 public class SeedApplication {
 
   public static void main(String[] args) {

@@ -66,6 +66,7 @@ You can choose to modify directly from the source or generate from the skeleton.
    
 
 > - Disabled Redis: set `redis.enabled = false` in `application.yml`
+> - Multi-Profiles: `mvn xxx -Pdev/test/prod`
 
 
 # Component Version
