@@ -19,6 +19,7 @@ With this skeleton project, you have completed the integration of the following 
 - [x] Pagehelper
 - [x] Swagger
 - [x] Redission
+- [x] Curator
 - [ ] Spring Security
 - [ ] Sharding-JDBC
 - [ ] Sentinel
@@ -27,6 +28,7 @@ With this skeleton project, you have completed the integration of the following 
 - [ ] Seata
 - [ ] Nacos
 - [ ] SkyWalking
+- [ ] MapStruct
 
 # Quick Start
 
@@ -62,6 +64,7 @@ You can choose to modify directly from the source or generate from the skeleton.
    spring.datasource.druid.username
    spring.datasource.druid.password
    dubbo.redistry.address
+   registry.zookeeper.serverLists
    ```
    
 
@@ -84,4 +87,7 @@ You can choose to modify directly from the source or generate from the skeleton.
 | `swagger`                        | `2.9.2`         |
 | `lombok`                         | `1.8.12`        |
 | `redission`                      | `3.13.1`        |
+| `curator`                        | `5.1.0`         |
+| `zookeeper`                      | `3.6.0`         |
+| `mockito`                        | `3.5.13`        |
 
