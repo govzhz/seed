@@ -54,3 +54,8 @@ redis:
     max-wait: 1000
   timeout: 10000
   testOnBorrow: true
+
+registry:
+  zookeeper:
+    serverLists: prod:2181
+    namespace: seed

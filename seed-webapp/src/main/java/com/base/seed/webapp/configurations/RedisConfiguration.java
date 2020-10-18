@@ -1,6 +1,6 @@
 package com.base.seed.webapp.configurations;
 
-import com.base.seed.webapp.properties.RedisProperties;
+import com.base.seed.common.properties.RedisProperties;
 import java.util.Arrays;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

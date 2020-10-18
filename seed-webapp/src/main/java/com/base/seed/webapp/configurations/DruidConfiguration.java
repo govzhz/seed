@@ -3,7 +3,7 @@ package com.base.seed.webapp.configurations;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
-import com.base.seed.webapp.properties.DruidProperties;
+import com.base.seed.common.properties.DruidProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

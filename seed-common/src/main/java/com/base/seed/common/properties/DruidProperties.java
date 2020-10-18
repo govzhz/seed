@@ -1,4 +1,4 @@
-package com.base.seed.webapp.properties;
+package com.base.seed.common.properties;
 
 import com.alibaba.fastjson.PropertyNamingStrategy;
 import com.alibaba.fastjson.annotation.JSONType;
