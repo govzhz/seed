@@ -1,6 +1,5 @@
 package com.base.seed.integration.client.registry.curator;
 
-
 import com.base.seed.integration.client.registry.ConnStatusListener;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +13,7 @@ public class CuratorConnectionStateListener implements ConnectionStateListener {
   private static final long UNKNOWN = -1L;
   private long lastSessionId;
   private final CuratorFramework client;
-  private List<ConnStatusListener> listeners;
+  private final List<ConnStatusListener> listeners;
 
   public CuratorConnectionStateListener(CuratorFramework client, List<ConnStatusListener> listeners) {
     this.client = client;
@@ -43,7 +42,8 @@ public class CuratorConnectionStateListener implements ConnectionStateListener {
         break;
       case RECONNECTED:
         if (currentSessionId == UNKNOWN || currentSessionId != lastSessionId) {
-          log.warn("Previous session[{}] was lost and a new session[{}] was recreated", lastSessionId, currentSessionId );
+          log.warn("Previous session[{}] was lost and a new session[{}] was recreated", lastSessionId,
+              currentSessionId);
           publish(ConnStatusListener.NEW_SESSION_CREATED);
         } else {
           log.warn("Curator zookeeper session[{}] resumed.", currentSessionId);

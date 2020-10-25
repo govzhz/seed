@@ -4,9 +4,9 @@ import com.base.seed.common.exception.RegistryException;
 import com.base.seed.common.properties.ZookeeperProperties;
 import com.base.seed.integration.client.registry.ConnStatusListener;
 import com.base.seed.integration.client.registry.DataChangeListener;
-import com.base.seed.integration.client.registry.ZkClient;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -17,7 +17,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.framework.api.transaction.CuratorOp;
+import org.apache.curator.framework.api.transaction.TransactionOp;
 import org.apache.curator.framework.recipes.cache.CuratorCache;
+import org.apache.curator.framework.recipes.leader.LeaderLatch;
+import org.apache.curator.framework.recipes.leader.Participant;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException.NoNodeException;
@@ -28,14 +32,14 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class CuratorZkClient implements ZkClient {
+public class CuratorCoordinatorZkClient implements CoordinatorZkClient {
 
   private final CuratorFramework client;
   private final List<ConnStatusListener> connStatusListeners = new CopyOnWriteArrayList<>();
   private final Map<String, CuratorCache> caches = new ConcurrentHashMap<>();
 
   @Autowired
-  public CuratorZkClient(ZookeeperProperties properties) {
+  public CuratorCoordinatorZkClient(ZookeeperProperties properties) {
     try {
       CuratorFrameworkFactory.Builder builder = CuratorFrameworkFactory.builder()
           .connectString(properties.getServerLists())
@@ -65,7 +69,9 @@ public class CuratorZkClient implements ZkClient {
     try {
       content = new String(client.getData().forPath(nodePath), StandardCharsets.UTF_8);
     } catch (NoNodeException ex) {
-      log.warn("Get data from a non-existent node[{}]", nodePath);
+      if (log.isDebugEnabled()) {
+        log.warn("Get data from a non-existent node[{}]", nodePath);
+      }
     } catch (Exception e) {
       throw new RegistryException(String.format("Get node[%s] value failed.", nodePath), e);
     }
@@ -80,8 +86,10 @@ public class CuratorZkClient implements ZkClient {
           .withMode(CreateMode.EPHEMERAL)
           .forPath(nodePath, value.getBytes(StandardCharsets.UTF_8));
     } catch (NodeExistsException ex) {
-      log.warn("Due to the creation of a ephemeral node of the same path[{}],"
-          + " the original node[value={}] will be deleted soon", nodePath, getData(nodePath));
+      if (log.isDebugEnabled()) {
+        log.warn("Due to the creation of a ephemeral node of the same path[{}],"
+            + " the original node[value={}] will be deleted soon", nodePath, getData(nodePath));
+      }
       deleteNode(nodePath);
       createEphemeralNode(nodePath, value);
     } catch (Exception e) {
@@ -138,7 +146,9 @@ public class CuratorZkClient implements ZkClient {
     try {
       client.delete().deletingChildrenIfNeeded().forPath(nodePath);
     } catch (NoNodeException ex) {
-      log.warn("Delete a non-existent node[{}]", nodePath);
+      if (log.isDebugEnabled()) {
+        log.warn("Delete a non-existent node[{}]", nodePath);
+      }
     } catch (Exception e) {
       throw new RegistryException(String.format("Delete node[%s] failed.", nodePath), e);
     }
@@ -150,7 +160,9 @@ public class CuratorZkClient implements ZkClient {
     try {
       nodePaths = client.getChildren().forPath(nodePath);
     } catch (NoNodeException ex) {
-      log.warn("Get a non-existent node[{}] children path", nodePath);
+      if (log.isDebugEnabled()) {
+        log.warn("Get a non-existent node[{}] children path", nodePath);
+      }
     } catch (Exception e) {
       throw new RegistryException(String.format("Get children path failed, nodePath=%s", nodePath), e);
     }
@@ -180,10 +192,68 @@ public class CuratorZkClient implements ZkClient {
       registryCenterTime = Optional.ofNullable(client.checkExists().forPath(nodePath))
           .map(Stat::getMtime).orElse(-1L);
     } catch (NoNodeException ex) {
-      log.warn("Get a non-existent node[{}] registry center time", nodePath);
+      if (log.isDebugEnabled()) {
+        log.warn("Get a non-existent node[{}] registry center time", nodePath);
+      }
     } catch (Exception e) {
       throw new RegistryException(String.format("Get registry center time failed, nodePath=%s", nodePath), e);
     }
     return registryCenterTime;
+  }
+
+  @Override
+  public boolean isLeader(LeaderLatch leaderLatch) {
+    return leaderLatch.hasLeadership();
+  }
+
+  @Override
+  public boolean isLeaderUntilBlock(LeaderLatch leaderLatch) {
+    long deadlockCount = -1L;
+    try {
+      Participant leader = leaderLatch.getLeader();
+      while (StringUtils.isBlank(leader.getId())) {
+        if (deadlockCount++ > 500) {
+          log.error("Is leader until block Deadlock!, thread={}", Thread.currentThread().getName());
+        }
+        TimeUnit.MILLISECONDS.sleep(100L);
+        leader = leaderLatch.getLeader();
+      }
+    } catch (Exception e) {
+      throw new RegistryException(String.format("Is leader until block failed, latchPath=%s", leaderLatch.getOurPath()), e);
+    }
+    return isLeader(leaderLatch);
+  }
+
+  @Override
+  public String getLeaderId(LeaderLatch leaderLatch) {
+    try {
+      return leaderLatch.getLeader().getId();
+    } catch (Exception e) {
+      throw new RegistryException(String.format("Get leader id failed, latchPath=%s", leaderLatch.getOurPath()), e);
+    }
+  }
+
+  @Override
+  public void electLeader(LeaderLatch leaderLatch) {
+    try {
+      leaderLatch.start();
+    } catch (Exception e) {
+      throw new RegistryException(String.format("Elect leader failed, latchPath=%s", leaderLatch.getOurPath()), e);
+    }
+  }
+
+  @Override
+  public void executeInTransaction(TransactionExecutionCallback callback) {
+    try {
+      TransactionOp transactionOp = client.transactionOp();
+      List<CuratorOp> operations = new LinkedList<>(callback.execute(transactionOp));
+      client.transaction().forOperations(operations);
+    } catch (NoNodeException | NodeExistsException ex) {
+      if (log.isDebugEnabled()) {
+        log.warn("Execute in transaction", ex);
+      }
+    } catch (Exception e) {
+      throw new RegistryException("Execute in transaction failed.", e);
+    }
   }
 }

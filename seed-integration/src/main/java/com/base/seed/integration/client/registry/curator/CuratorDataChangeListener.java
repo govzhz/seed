@@ -26,12 +26,12 @@ public class CuratorDataChangeListener implements CuratorCacheListener {
     }
 
     if (oldData == null && newData == null) {
-      log.warn("Data change, but oldData and newData is null, type={}, oldData={}, newData={}",
-          type, JSON.toJSONString(oldData), JSON.toJSONString(newData));
+      log.warn("Data change, but oldData and newData is null, type={}", type);
       return;
     }
 
-    String path = Type.NODE_DELETED.equals(type) ? Optional.ofNullable(oldData).map(ChildData::getPath).orElse(StringUtils.EMPTY)
+    String path =
+        Type.NODE_DELETED.equals(type) ? Optional.ofNullable(oldData).map(ChildData::getPath).orElse(StringUtils.EMPTY)
             : Optional.ofNullable(newData).map(ChildData::getPath).orElse(StringUtils.EMPTY);
     byte[] data = Type.NODE_DELETED.equals(type) ? Optional.ofNullable(oldData).map(ChildData::getData).orElse(null)
         : Optional.ofNullable(newData).map(ChildData::getData).orElse(null);
@@ -45,19 +45,27 @@ public class CuratorDataChangeListener implements CuratorCacheListener {
     DataChangeListener.Type event;
     switch (type) {
       case NODE_CREATED:
-        log.warn("Node created, path={}, content={}", path, content);
+        if (log.isDebugEnabled()) {
+          log.warn("Node created, path={}, content={}", path, content);
+        }
         event = DataChangeListener.Type.NODE_CREATED;
         break;
       case NODE_CHANGED:
-        log.warn("Node changed, path={}, content={}", path, content);
+        if (log.isDebugEnabled()) {
+          log.warn("Node changed, path={}, content={}", path, content);
+        }
         event = DataChangeListener.Type.NODE_CHANGED;
         break;
       case NODE_DELETED:
-        log.warn("Node deleted, path={}, content={}", path, content);
+        if (log.isDebugEnabled()) {
+          log.warn("Node deleted, path={}, content={}", path, content);
+        }
         event = DataChangeListener.Type.NODE_DELETED;
         break;
       default:
-        log.warn("Unknown Node Event, path={}, content={}", path, content);
+        if (log.isDebugEnabled()) {
+          log.warn("Unknown Node Event, path={}, content={}", path, content);
+        }
         return;
     }
     dataChangeListener.onDataChanged(path, content, event);

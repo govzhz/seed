@@ -29,6 +29,7 @@ With this skeleton project, you have completed the integration of the following 
 - [ ] Nacos
 - [ ] SkyWalking
 - [ ] MapStruct
+- [ ] Akka
 
 # Quick Start
 

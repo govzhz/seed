@@ -1,8 +1,10 @@
 package com.base.seed.common;
 
 import javax.validation.constraints.NotNull;
+import lombok.Getter;
 
-public class PageParam {
+@Getter
+public class PageParam<T> {
 
   /**
    * 页码
@@ -16,19 +18,8 @@ public class PageParam {
   @NotNull
   private Integer size;
 
-  public void setPage(Integer page) {
-    this.page = page;
-  }
-
-  public void setSize(Integer size) {
-    this.size = size;
-  }
-
-  public Integer getPage() {
-    return page;
-  }
-
-  public Integer getSize() {
-    return size;
-  }
+  /**
+   * 分页数据
+   */
+  private T date;
 }

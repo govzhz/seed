@@ -1,9 +1,12 @@
 package com.base.seed.integration;
 
 import com.base.seed.common.properties.ZookeeperProperties;
-import com.base.seed.integration.client.registry.curator.CuratorZkClient;
+import com.base.seed.integration.client.registry.curator.CuratorCoordinatorZkClient;
+import com.base.seed.service.stock.NodePath;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.recipes.leader.LeaderLatch;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,13 +14,13 @@ import org.junit.Test;
 
 public class CuratorZkClientTest {
 
-  private CuratorZkClient curatorZkClient;
+  private CuratorCoordinatorZkClient curatorZkClient;
 
   private static final String ROOT = "/seed";
 
   @Before
   public void setUp() {
-    curatorZkClient = new CuratorZkClient(getZKProperties());
+    curatorZkClient = new CuratorCoordinatorZkClient(getZKProperties());
   }
 
   @After
@@ -105,6 +108,17 @@ public class CuratorZkClientTest {
     curatorZkClient.deleteNode(getPath("test_path"));
     TimeUnit.MILLISECONDS.sleep(1000);
     Assert.assertTrue(listener.isSuccess());
+  }
+
+  /**
+   * 选主
+   */
+  @Test
+  public void testElectLeader() {
+    LeaderLatch leaderLatch =
+        new LeaderLatch((CuratorFramework) curatorZkClient.getClient(), NodePath.getLockNodeKey());
+    curatorZkClient.electLeader(leaderLatch);
+    Assert.assertTrue(curatorZkClient.isLeader(leaderLatch));
   }
 
   private String getPath(String nodePath) {
