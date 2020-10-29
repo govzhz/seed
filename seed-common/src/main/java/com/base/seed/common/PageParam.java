@@ -1,9 +1,9 @@
 package com.base.seed.common;
 
 import javax.validation.constraints.NotNull;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 public class PageParam<T> {
 
   /**

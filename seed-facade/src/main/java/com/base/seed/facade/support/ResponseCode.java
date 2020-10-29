@@ -16,6 +16,7 @@ public enum ResponseCode {
   ORDER_STATUS_FAILED("A1003", "订单处理失败"),
   USER_CHANGE_PWD_ATTEMPT_EXCEEDED("A2001", "用户修改密码尝试次数超限"),
   ILLEGAL_PASSWORD_ERROR("A2002", "用户密码错误"),
+  STOCK_PRODUCT_NOT_IN_PROMOTION("A3001", "商品已从秒杀活动下架"),
 
   // B 错误来源为当前系统
   SYS_EXCEPTION("B0001", "系统执行出错"),

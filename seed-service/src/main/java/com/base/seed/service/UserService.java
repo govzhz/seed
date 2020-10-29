@@ -2,11 +2,11 @@ package com.base.seed.service;
 
 import com.base.seed.common.PageParam;
 import com.base.seed.dal.entity.UserDo;
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 public interface UserService {
 
-  List<UserDo> listUsers(PageParam pageParam);
+  PageInfo<UserDo> listUsers(PageParam<Void> pageParam);
 
   void changePwd(String userId, String oldPwd, String newPwd);
 }

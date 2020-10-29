@@ -5,7 +5,7 @@ import com.base.seed.dal.entity.UserDo;
 import com.base.seed.service.UserService;
 import com.base.seed.webapp.support.RestEntity;
 import com.base.seed.webapp.vo.UserChangePwdVo;
-import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -22,9 +22,9 @@ public class UserController {
   private UserService userService;
 
   @GetMapping(value = "/users")
-  public RestEntity<List<UserDo>> listUsers(@Validated PageParam param) {
-    List<UserDo> users = userService.listUsers(param);
-    return RestEntity.ok(users, ((Page<UserDo>) users).getTotal());
+  public RestEntity<List<UserDo>> listUsers(@Validated PageParam<Void> param) {
+    PageInfo<UserDo> pageInfo = userService.listUsers(param);
+    return RestEntity.ok(pageInfo.getList(), pageInfo.getTotal());
   }
 
   @PostMapping(value = "/users/{userId}/change-pwd")

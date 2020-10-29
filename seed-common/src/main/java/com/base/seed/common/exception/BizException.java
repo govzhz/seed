@@ -1,5 +1,6 @@
 package com.base.seed.common.exception;
 
+import com.base.seed.facade.support.ResponseCode;
 import lombok.Getter;
 
 /**
@@ -10,7 +11,7 @@ public class BizException extends RuntimeException {
   private static final long serialVersionUID = -5910219797132438456L;
 
   @Getter
-  private int errorCode = -1;
+  private ResponseCode errorCode;
 
   public BizException() {
   }
@@ -19,7 +20,7 @@ public class BizException extends RuntimeException {
     super(message);
   }
 
-  public BizException(String message, int errorCode) {
+  public BizException(String message, ResponseCode errorCode) {
     super(message);
     this.errorCode = errorCode;
   }

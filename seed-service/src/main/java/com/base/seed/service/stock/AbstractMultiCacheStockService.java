@@ -1,7 +1,7 @@
 package com.base.seed.service.stock;
 
-import com.base.seed.common.constants.SeedErrorCode;
 import com.base.seed.common.exception.BizException;
+import com.base.seed.facade.support.ResponseCode;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,7 +23,7 @@ public abstract class AbstractMultiCacheStockService implements StockService {
   public AtomicLong getStock(Long productId, Long promotionId) {
     if (!checkProductInPromotion(productId, promotionId)) {
       throw new BizException(String.format("Product[%s] not in promotion[%s]", productId, promotionId),
-          SeedErrorCode.STOCK_PRODUCT_NOT_IN_PROMOTION);
+          ResponseCode.STOCK_PRODUCT_NOT_IN_PROMOTION);
     }
 
     ConcurrentHashMap<Long, AtomicLong> promotionMap = stockCacheMap.get(productId);
