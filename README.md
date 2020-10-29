@@ -22,7 +22,7 @@ With this skeleton project, you have completed the integration of the following 
 - [x] Curator
 - [ ] Spring Security
 - [ ] Sharding-JDBC
-- [ ] Sentinel
+- [x] Sentinel
 - [ ] RocketMQ
 - [ ] Elastic-Job
 - [ ] Seata
@@ -91,4 +91,5 @@ You can choose to modify directly from the source or generate from the skeleton.
 | `curator`                        | `5.1.0`         |
 | `zookeeper`                      | `3.6.0`         |
 | `mockito`                        | `3.5.13`        |
+| `spring-cloud-starter-alibaba-sentinel` | `2.2.0.RELEASE` |
 
